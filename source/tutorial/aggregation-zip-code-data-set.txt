@@ -282,7 +282,51 @@ The output documents of this aggregation operation resemble the following:
        "pop" : 45
      }
    }
+   
+Return States with More than 1,000 Zip Codes
+--------------------------------------------
 
+The following aggregation operation returns a list of states with more than
+1,000 unique zip codes:
+
+.. code-block:: javascript
+
+	db.zips.aggregate( [
+	   { $group: 
+		   { _id: "$state", 
+		   	 sum: { $sum: 1 } 
+	       } 
+	   },
+	   { $match: 
+		   { sum: { $gte: 1000 } } 
+	   }
+	] )
+	
+In this example, the :ref:`aggregation pipeline <aggregation-pipeline>`
+consists of a :pipeline:`$group` stage, a :pipeline:`$match` stage, and a
+:pipeline:`$sort` stage:
+
+- The :pipeline:`$group` stage groups the documents by state and
+  calculates the :group:`sum <$sum>` of all zip codes in that state, and outputs
+  a document for each one.
+
+- The :pipeline:`$match` stage filters out all states with fewer than 1,000
+  zip codes.
+
+- The :pipeline:`$sort` stage orders the results in descending order by total
+  number of zip codes.
+  
+The output documents of this aggregation operation resemble the following:
+
+.. code-block:: javascript
+
+{ "_id" : "TX", "sum" : 1671 }
+{ "_id" : "NY", "sum" : 1595 }
+{ "_id" : "CA", "sum" : 1516 }
+{ "_id" : "PA", "sum" : 1458 }
+{ "_id" : "IL", "sum" : 1237 }
+{ "_id" : "OH", "sum" : 1007 }  
+  
 .. [#multiple-zips-per-city] A city can have more than one zip
    code associated with it as different sections of the city can each
    have a different zip code.
