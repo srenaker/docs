@@ -293,12 +293,12 @@ The following aggregation operation returns a list of states with more than
 
 	db.zips.aggregate( [
 	   { $group: 
-		   { _id: "$state", 
-		   	 sum: { $sum: 1 } 
-	       } 
+	      { _id: "$state", 
+		     zipcodes: { $sum: 1 } 
+	      } 
 	   },
 	   { $match: 
-		   { sum: { $gte: 1000 } } 
+	      { zipcodes: { $gte: 1000 } } 
 	   }
 	] )
 	
@@ -306,7 +306,7 @@ In this example, the :ref:`aggregation pipeline <aggregation-pipeline>`
 consists of a :pipeline:`$group` stage, a :pipeline:`$match` stage, and a
 :pipeline:`$sort` stage:
 
-- The :pipeline:`$group` stage groups the documents by state and
+- The :pipeline:`$group` stage groups the documents by state,
   calculates the :group:`sum <$sum>` of all zip codes in that state, and outputs
   a document for each one.
 
@@ -320,12 +320,12 @@ The output documents of this aggregation operation resemble the following:
 
 .. code-block:: javascript
 
-	{ "_id" : "TX", "sum" : 1671 }
-	{ "_id" : "NY", "sum" : 1595 }
-	{ "_id" : "CA", "sum" : 1516 }
-	{ "_id" : "PA", "sum" : 1458 }
-	{ "_id" : "IL", "sum" : 1237 }
-	{ "_id" : "OH", "sum" : 1007 }  
+	{ "_id" : "TX", "zipcodes" : 1671 }
+	{ "_id" : "NY", "zipcodes" : 1595 }
+	{ "_id" : "CA", "zipcodes" : 1516 }
+	{ "_id" : "PA", "zipcodes" : 1458 }
+	{ "_id" : "IL", "zipcodes" : 1237 }
+	{ "_id" : "OH", "zipcodes" : 1007 }  
   
 .. [#multiple-zips-per-city] A city can have more than one zip
    code associated with it as different sections of the city can each
