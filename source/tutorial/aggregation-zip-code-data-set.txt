@@ -320,12 +320,12 @@ The output documents of this aggregation operation resemble the following:
 
 .. code-block:: javascript
 
-{ "_id" : "TX", "sum" : 1671 }
-{ "_id" : "NY", "sum" : 1595 }
-{ "_id" : "CA", "sum" : 1516 }
-{ "_id" : "PA", "sum" : 1458 }
-{ "_id" : "IL", "sum" : 1237 }
-{ "_id" : "OH", "sum" : 1007 }  
+	{ "_id" : "TX", "sum" : 1671 }
+	{ "_id" : "NY", "sum" : 1595 }
+	{ "_id" : "CA", "sum" : 1516 }
+	{ "_id" : "PA", "sum" : 1458 }
+	{ "_id" : "IL", "sum" : 1237 }
+	{ "_id" : "OH", "sum" : 1007 }  
   
 .. [#multiple-zips-per-city] A city can have more than one zip
    code associated with it as different sections of the city can each
