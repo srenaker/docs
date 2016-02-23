@@ -45,6 +45,48 @@ whether MongoDB should ``error`` and reject documents
 that violate the validation rules or ``warn`` about the violations
 in the log but allow invalid documents.
 
+To see which validations exist on a collection, use the
+:method:`db.getCollectionInfos()` method:
+
+.. code-block:: sh
+
+	[
+	   {
+	      "name" : "contacts",
+	         "options" : {
+	            "validator" : {
+	               "$or" : [
+	                  {
+	                     "phone" : {
+	                        "$type" : "string"
+	                     }
+	                  },
+	                  {
+	                     "email" : {
+	                        "$regex" : /@mongodb\.com$/
+	                     }
+	                  },
+	                  {
+	                     "status" : {
+	                        "$in" : [
+	                           "Unknown",
+	                           "Incomplete"
+	                        ]
+	                     }
+	                  }
+	               ]
+	           }   
+	       }
+	    },
+	    {
+	       "name" : "system.indexes",
+	       "options" : {
+			
+	       }
+	    }
+	]
+
+
 Behavior
 --------
 
